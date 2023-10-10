@@ -17,7 +17,7 @@ class ResponseBase(BaseModel):
     degrees: Optional[int] = Field(None, description="", example=0)
     blocking: Optional[int] = Field(None, description="", example=0)
     direction: Optional[str] = Field(None, description="", example="shortest/clockwise/anticlockwise")
-    deleta: Optional[int] = Field(None, description="", example=0)
+    delta: Optional[float] = Field(None, description="", example=0)
 
 class Response(ResponseBase):
     done: bool = Field(False, description="完了フラグ")

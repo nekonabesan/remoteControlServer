@@ -8,4 +8,4 @@ class Request(BaseModel):
     mode: Optional[int] = Field(None, description="", example=0)
     speed: Optional[int] = Field(None, description="", example=0)
     degrees: Optional[int] = Field(None, description="", example=0)
-    delta: Optional[int] = Field(None, description="", example=0)
+    delta: Optional[float] = Field(None, description="", example=0)

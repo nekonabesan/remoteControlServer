@@ -23,7 +23,6 @@ class Wave():
         degrees = request.degrees
         speed = request.speed
         delta = request.delta
-        delta = now = time.time() - delta
         print(str(delta) + "\t" + str(degrees) + "\t" + str(speed))
         # mode 
         if mode == self.NONE:
@@ -34,12 +33,11 @@ class Wave():
             date = now.strftime('%Y%m%d%H%M%S')
             session_id  = hashlib.md5(date.encode()).hexdigest()
         # 繰り返し回数を超過した場合、停止コードを送信
-        if request.counter == 100:
+        if request.counter == 10:
             stop_signal = 1
         else:
             stop_signal = 0
         # カウンタをインクリメント
         counter = counter + 1
         # delta
-        delta = time.time()
-        return session_id,counter,mode,stop_signal
+        return session_id,counter,mode,stop_signal,delta
