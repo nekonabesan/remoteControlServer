@@ -29,7 +29,7 @@ class Wave():
         if mode == self.NONE:
             mode = self.RUN_TO_POSITION
         # セッションIDが未定義の場合
-        if session_id == None or int(session_id) == 0:
+        if session_id == None or session_id == '0':
             now = datetime.datetime.now()
             date = now.strftime('%Y%m%d%H%M%S')
             session_id  = hashlib.md5(date.encode()).hexdigest()
