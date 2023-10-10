@@ -11,14 +11,12 @@ class Wave():
     RUN_FOR_SECONDS = 2
     RUN_TO_POSITION = 3
 
-
-    def __init__(self) -> None:
-        # 初期化
-        pass
+    #def __init__(self) -> None:
+    #    # 初期化
+    #    pass
 
     def calc(self, request: request_observer.Request):
-        # 
-        request = vars(request)
+        print(request)
         session_id = request.session_id
         counter = request.counter
         mode = request.mode
@@ -34,7 +32,7 @@ class Wave():
         if session_id == None or int(session_id) == 0:
             now = datetime.datetime.now()
             date = now.strftime('%Y%m%d%H%M%S')
-            session_id = hs = hashlib.md5(date.encode()).hexdigest()
+            session_id  = hashlib.md5(date.encode()).hexdigest()
         # 繰り返し回数を超過した場合、停止コードを送信
         if request.counter == 100:
             stop_signal = 1
