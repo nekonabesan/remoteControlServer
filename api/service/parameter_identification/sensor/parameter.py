@@ -32,7 +32,7 @@ class Parameter:
             date = now.strftime('%Y%m%d%H%M%S')
             session_id  = hashlib.md5(date.encode()).hexdigest()
         # 繰り返し回数を超過した場合、停止コードを送信
-        if request.counter == 1000:
+        if request.counter == 100:
             fileHandler.writer()
             stop_signal = 1
         else:
