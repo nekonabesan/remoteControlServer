@@ -10,11 +10,12 @@ RUN apt-get update && apt-get install -y \
     vim
 
 # pipを使ってpoetryをインストール
+RUN python3 -m pip install --upgrade pip setuptools wheel
+RUN python3 -m pip install numpy
 RUN pip install poetry
 RUN pip install paramiko
 RUN pip install pyserial
 RUN pip install buildhat
-RUN pip install numpy
 RUN pip install control
 RUN pip install matplotlib
 RUN pip install scipy
