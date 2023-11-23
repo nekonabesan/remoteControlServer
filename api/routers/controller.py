@@ -9,7 +9,8 @@ import api.schemas.entity.feedback.optimal_regulator.request as request_optimal_
 import api.schemas.entity.feedback.optimal_regulator.response as response_optimal_regulator
 import api.service.parameter_identification.motor.wave as wave_motor
 import api.service.parameter_identification.sensor.parameter as parameter_sensor
-import api.service.feedback.optimal_regulator as optimal_regulator_feedback
+import api.service.feedback.v1.optimal_regulator_v1 as optimal_regulator_feedback
+import api.service.feedback.v2.optimal_regulator_v2 as optimal_regulator_feedback_v2
 import api.service.util.FileHandrer as util_file_handler
 
 
@@ -36,13 +37,26 @@ async def observer(request: request_physical.Request):
     session_id,counter,stop_signal,delta = degrees.degrees(request, fileHandler)
     return [response_physical.Response(session_id=session_id, counter=counter, stop_signal=stop_signal, delta=delta)]
 
-@router.post("/controller/feedback/optimal_regulator/", response_model=List[response_optimal_regulator.Response])
+@router.post("/controller/feedback/v1/optimal_regulator/", response_model=List[response_optimal_regulator.Response])
 async def feedback(request: request_optimal_regulator.Request):
     print(type(request))
     global fileHandler
     if fileHandler.data == None:
         fileHandler = util_file_handler.fileHandler()
     optimalRegulator = optimal_regulator_feedback.optimalRegulator()
+    session_id,counter,mode,stop_signal,ua,ud,direction_a,direction_d,delta = optimalRegulator.calc(request, fileHandler)
+    return [response_optimal_regulator.Response(
+        session_id=session_id,counter=counter,mode=mode,stop_signal=stop_signal
+        ,ua=ua, ud=ud, direction_a=direction_a, direction_d=direction_d
+        ,delta=delta)]
+
+@router.post("/controller/feedback/v2/optimal_regulator/", response_model=List[response_optimal_regulator.Response])
+async def feedback(request: request_optimal_regulator.Request):
+    print(type(request))
+    global fileHandler
+    if fileHandler.data == None:
+        fileHandler = util_file_handler.fileHandler()
+    optimalRegulator = optimal_regulator_feedback_v2.optimalRegulator()
     session_id,counter,mode,stop_signal,ua,ud,direction_a,direction_d,delta = optimalRegulator.calc(request, fileHandler)
     return [response_optimal_regulator.Response(
         session_id=session_id,counter=counter,mode=mode,stop_signal=stop_signal

@@ -10,14 +10,14 @@ class optimalRegulator():
     U_MAX = 100
     U_MIN = 0
     SPEED = 0
-    OFFSET = 38
+    OFFSET = 34
     FWD = 0
     BCK = 1
 
-    K1 = Decimal(str(340.62423613))
-    K2 = Decimal(str(47.14029004))
-    K3 = Decimal(str(10))
-    K4 = Decimal(str(7.43633142))
+    K1 = Decimal(str(138.53945629))
+    K2 = Decimal(str(20.40010486))
+    K3 = Decimal(str(1.04199537))
+    K4 = Decimal(str(3.21362381))
 
     def op_sign(self, value):
         return (value > 0) - (value < 0)
@@ -48,6 +48,9 @@ class optimalRegulator():
         if rotation_d == self.BCK:
             delta_theta_d = -delta_theta_d
         # motorの振子に対する角度
+        motor_a_angle = delta_theta_a - delta_angle_y
+        motor_d_angle = delta_theta_d - delta_angle_y
+        '''
         if self.op_sign(delta_theta_a) == self.op_sign(delta_angle_y):
             motor_a_angle = delta_theta_a - delta_angle_y
         else:
@@ -56,6 +59,7 @@ class optimalRegulator():
             motor_d_angle = delta_theta_d - delta_angle_y
         else:
             motor_d_angle = delta_angle_y - delta_theta_d
+        '''
         # 振子の角速度
         if delta_angle_y == 0 or delta_time == 0:
             angular_velocity_y = Decimal(0)
