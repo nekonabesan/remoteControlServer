@@ -11,13 +11,13 @@ class optimalRegulator():
     U_MIN = 0
     SPEED = 0
     OFFSET = 34
-    FWD = 0
-    BCK = 1
+    FWD = 1
+    BCK = 0
 
-    K1 = Decimal(str(138.53945629))
-    K2 = Decimal(str(20.40010486))
-    K3 = Decimal(str(1.04199537))
-    K4 = Decimal(str(3.21362381))
+    K1 = Decimal(str(236.86507498))
+    K2 = Decimal(str(28.46595518))
+    K3 = Decimal(str(4.11073668))
+    K4 = Decimal(str(4.33681214))
 
     def op_sign(self, value):
         return (value > 0) - (value < 0)
