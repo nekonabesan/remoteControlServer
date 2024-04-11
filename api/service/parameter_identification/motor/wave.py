@@ -24,19 +24,23 @@ class Wave():
         a_speed = request.a_speed
         a_position = request.a_position
         a_aposition = request.a_aposition
-        b_speed = request.b_speed
-        b_position = request.b_position
-        b_aposition = request.b_aposition
+        delta_theta_a = request.delta_theta_a
+        d_speed = request.d_speed
+        d_position = request.d_position
+        d_aposition = request.d_aposition
+        delta_theta_d = request.delta_theta_d
         delta = request.delta
         line = []
         line.append(str(delta))
         line.append(str(a_speed))
         line.append(str(a_position))
-        line.append(str(b_speed))
-        line.append(str(b_position))
+        line.append(str(delta_theta_a))
+        line.append(str(d_speed))
+        line.append(str(d_position))
+        line.append(str(delta_theta_d))
         if counter == 0:
             # ヘッダ行を追加
-            fileHandler.appender(['delta', 'a_speed', 'a_position', 'b_speed', 'b_position'])
+            fileHandler.appender(['delta', 'a_speed', 'a_position', 'delta_theta_a', 'd_speed', 'd_position', 'delta_theta_d'])
         fileHandler.appender(line)
         # mode 
         if mode == self.NONE:
